@@ -1,0 +1,33 @@
+<div class="panel panel-info">
+<div class="panel panel-heading" >
+    Browse Company
+    
+</div> 
+
+  
+                 
+   <table class="table">
+        <tr>
+            <td>Company Names</td>
+        </tr>
+            <tr ng-repeat="company in searchin.orgn">
+                <td>
+ <img class="btn" href="/viewoneorg/{{company.organizationnumber}}" src="/uploads/images/{{company.image}}" style="width:60px;height:60px" >
+
+                  
+                        {{ company.subscriptionname }}
+                  
+                       <!-- <a href="/company/:organizationname">
+                       
+                      
+                        </a>-->
+                        
+                        </td>
+           
+            </tr>
+    </table>
+    
+
+
+</div>
+<br>

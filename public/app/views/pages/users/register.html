@@ -1,0 +1,80 @@
+
+<div class="panel panel-info" style="width:50%">
+    <div style="text-align:center;"><strong><h1>Medlem</h1></strong></div>
+    <div class="btn-group btn-group-justified" style="text-align:center;">
+    <strong>Sign up as a</strong>
+     <br>
+    <a href='/register'> <button type=button class="btn btn-success" id=f1>Member</button></a>
+    <a href='/organizations'> <button type=button class="btn btn-default" id=f2 >Organization</button></a>
+     <br>
+    </div>
+
+
+<div class="table" style="text-align:center;">
+<form   id="members" ng-submit="register.regUser(regData);">
+    <br>
+        <!--First Name-->
+    <label>Firstname:</label>
+    <input  type="text" name="firstname" placeholder="Please enter your firstname" ng-model="register.regData.firstname">
+    <br>
+    <!--Last Name-->
+    <label>Lastname:</label>
+    <input  type="text" name="lastname" placeholder="Please enter your lastname" ng-model="register.regData.lastname">
+    <br>
+    <!--SSN
+<label>SSN:</label>
+    <input type="number" name="ssn" placeholder="Please enter your ssn" ng-model="register.regData.ssn">
+    -->
+
+    <!--username-->
+    <label>Username:</label>
+    <input  type="text" name="username" placeholder="Please enter your username" ng-model="register.regData.username">
+   
+     <br>
+    <!--Email-->
+    <label>Email:</label>
+    <input  type="text" name="email" placeholder="Please enter your email" ng-model="register.regData.email">
+    <br>
+    
+    <!--Password-->
+<label>Password:</label>
+    <input  type="text" name="password" placeholder="Please enter your password" ng-model="register.regData.password">
+    <br>
+    
+<!--Gender-->
+<label>Gender:</label>
+    <select name="gender" class="dropdown" ng-model="register.regData.gender">
+        <option>Male</option>
+        <option>Female</option>
+    </select>
+    <br>
+    <!--Age-->
+<label>Age:</label>
+    <input type="number" name="age" placeholder="Please enter your age" ng-model="register.regData.age">
+    <br>
+    <!--Phno-->
+<label>Phno:</label>
+    <input type="number" name="phno" placeholder="Please enter your phno" ng-model="register.regData.phno">
+    <br>
+
+
+
+<button class="btn btn-primary" type="submit">Register</button>
+</form>
+
+</div>
+</div>
+<br>
+<div class="jumbotron text-center" ng-show="register.loading">
+    <span class="glyphicon glyphicon-repeat spinner"></span>
+    <p>Loading....</p>
+</div>
+
+
+<div class="row show-hide-message" ng-show="register.successMsg">
+    <div class="alert alert-success">{{register.successMsg}}</div>
+</div>
+
+<div class="row show-hide-message" ng-show="register.errorMsg">
+    <div class="alert alert-danger">{{register.errorMsg}}</div>
+</div>

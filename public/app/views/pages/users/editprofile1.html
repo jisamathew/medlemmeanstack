@@ -1,0 +1,57 @@
+<div class="page-header">
+   <h1 style="color:white"> {{main.username}}'s Profile</h1>
+
+</div>
+<div class="panel panel-info">
+
+    <form name="memForm" ng-submit="updation2.putProfile2()" >
+    <div class="panel-heading" style="text-align:center;"><strong>User Profile </strong></div>
+
+        <table class="table" ng-repeat="mem in updation2.userdet">
+    <tr>
+        <td>Firstname:</td>
+
+        <td><input type="text" id="firstname" value="{{mem.firstname}}">
+        </td>
+        </tr>
+        <tr>
+            <td>Lastname:</td>
+
+            <td><input type="text" id="lastname" value="{{mem.lastname}}"></td>
+        </tr>
+
+<tr>
+    <td>User name:</td>
+    <td><input type="text" id="username" value="{{mem.username}}"></td>
+</tr>
+
+<tr>
+    <td> Email :</td>
+    <td><input type="text" id="email" value="{{mem.email}}"></td>
+</tr>
+
+<tr>
+    <td>  Age:</td>
+    <td><input type="text" id="age" value="{{mem.age}}"></td>
+</tr>
+<tr>
+    <td> Phno:</td>
+    <td><input type="text" id="phno" value="{{mem.phno}}"></td>
+</tr>
+<tr>
+    <td> SSN:</td>
+    <td><input type="text" value="{{mem.ssn}}" id="ssn" disabled></td>
+</tr>
+
+
+<tr>
+    <td><button class="btn btn-primary" type="submit">Update</button>           </td>
+   </td>
+
+
+
+</tr>
+</table>
+</form>
+</div>
+

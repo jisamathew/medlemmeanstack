@@ -1,0 +1,67 @@
+
+<div class="panel panel-info">
+    <div style="text-align:center;"><strong><h1>Medlem</h1></strong></div>
+    <div  style="text-align:center;">
+    
+<strong>Create benefit</strong>
+    
+     <br>
+ <form ng-submit="obenefit.benOrgan(benData);" id="benefit">
+  
+    <input type="hidden"  id="organizationnumber" name="organizationnumber" value="{{main.organizationnumber}}" >
+     <br>
+    <!--Benefit Name-->
+    <label>Benefit name:</label>
+    <input  type="text" name="benefitname" placeholder="Enter benefit name" ng-model="obenefit.benData.benefitname">
+  
+    <br>
+    <!--Benefit desc -->
+    <label>Benefit description:</label>
+    <input  type="text" name="benefitdesc" placeholder="Enter benefit description" ng-model="obenefit.benData.benefitdesc" >
+  
+  
+     <br>
+    <!--Billing Amount-->
+    <label>Upload Image:</label>
+    <div class="btn">
+  <input type="file" file-model="file.upload" id="fileinput" name="myfile" ng-disabled="uploading" >
+
+</div>
+
+    <br>
+
+    <!--Time-->
+    <label>Time Interval:</label>
+   <select class="dropdown" name="timeinterval" ng-model="obenefit.benData.timeinterval">
+<!--Select-->
+    <option value="" disabled selected>--SELECT--</option>
+      
+       <option>Daily</option>
+
+       <option>Weekly</option>
+
+       <option>Monthly</option>
+   </select>
+    <br>
+
+       <br>
+
+<button class="btn btn-default"  type="submit">Create</button>
+
+</form>
+     </div>
+     </div>
+<br>
+<div class="jumbotron text-center" ng-show="obenefit.loading">
+    <span class="glyphicon glyphicon-repeat spinner"></span>
+    <p>Loading....</p>
+</div>
+
+
+<div class="row show-hide-message" ng-show="obenefit.successMsg">
+    <div class="alert alert-success">{{obenefit.successMsg}}</div>
+</div>
+
+<div class="row show-hide-message" ng-show="obenefit.errorMsg">
+    <div class="alert alert-danger">{{obenefit.errorMsg}}</div>
+</div>

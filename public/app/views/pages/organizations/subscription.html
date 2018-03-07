@@ -1,0 +1,76 @@
+
+<div class="panel panel-info">
+    <div style="text-align:center;"><strong><h1>Medlem</h1></strong></div>
+    <div  style="text-align:center;">
+    
+<strong>Create a subscription</strong>
+    
+     <br>
+ <form ng-submit="subscript.subOrgan(subData);" id="subscription">
+  
+    
+    <input type="hidden"  id="organizationnumber" name="organizationnumber" value="{{main.organizationnumber}}"  >
+  
+     <br>
+    <!--Billing Name-->
+    <label>Subscription name:</label>
+    <input  type="text" name="subscriptionname" placeholder="Enter subscription name" ng-model="subscript.subData.subscriptionname" >
+  
+  
+  
+     <br>
+    <!--Billing Amount-->
+   <!--  <input  type="text" name="image" placeholder="upload image" ng-model="subscript.subData.image">
+    <a href="#" class="btn btn-default">
+          <span class="glyphicon glyphicon-upload"></span> Upload
+        </a><br>
+-->
+
+     
+    <div class="file-field input-field">
+        <label>Upload Image:</label>
+      
+
+<div class="btn">
+  <input type="file" file-model="file.upload" id="fileinput" name="myfile" ng-disabled="uploading" >
+
+</div>
+
+    </div>
+ 
+    <!--Time-->
+    <label>Time Interval:</label>
+   <select class="dropdown" name="timeinterval" ng-model="subscript.subData.timeinterval">
+       <option value="" disabled selected>--SELECT--</option>
+      
+       <option>Daily</option>
+
+       <option>Weekly</option>
+
+       <option>Monthly</option>
+   </select>
+    <br>
+
+       <br>
+
+<button class="btn btn-default"  type="submit">Create</button>
+
+
+
+</form>
+     </div>
+      </div>
+<br>
+<div class="jumbotron text-center" ng-show="subscript.loading">
+    <span class="glyphicon glyphicon-repeat spinner"></span>
+    <p>Loading....</p>
+</div>
+
+
+<div class="row show-hide-message" ng-show="subscript.successMsg">
+    <div class="alert alert-success">{{subscript.successMsg}}</div>
+</div>
+
+<div class="row show-hide-message" ng-show="subscript.errorMsg">
+    <div class="alert alert-danger">{{subscript.errorMsg}}</div>
+</div>

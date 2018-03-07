@@ -1,0 +1,70 @@
+<div class="page-header">
+        <h1 style="color:white"> {{main.username}}'s Profile</h1>
+
+</div>
+<div class="panel panel-info">
+    <form name="orgForm" ng-submit="updation.putProfile()" >
+    <div class="panel-heading" style="text-align:center;"><strong>Organization Profile </strong></div>
+
+    <table class="table" ng-repeat="org in updation.orgn">
+    <tr>
+        <td>Organization Number</td>
+
+        <td><input type="text"  id="organizationnumber" name="organizationnumber" value="{{org.organizationnumber}}"  disabled>
+   </td>
+         <input type="hidden"  id="username" name="username" value="{{org.username}}"  >
+  
+    
+    </tr>
+        <tr>
+        <td>Organization Name</td>
+
+        <td><input type="text" id="organizationname" name="organizationname"  value="{{org.organizationname}}">
+        <!--
+         
+        -->
+            </td>
+    </tr>
+        <tr>
+        <td>Address</td>
+
+        <td><input type="text" id="address" name="address"  value="{{org.address}}"></td>
+    </tr>
+        <tr>
+        <td>No.of Members</td>
+
+        <td>{{org.noofmember}}</td>
+    </tr>
+    <tr>
+        <td>
+            
+            <button   class="btn btn-primary" type="submit">Update</button>
+       
+        </td>
+
+    </tr>
+    
+    </table>
+    </form>
+</div>
+
+<!--
+<div class="row">
+   <div class="col-md-6">Organization Number</div>
+
+        <div class="col-md-6">{{main.organizationnumber}}</div>
+   </div>
+   -->
+<div class="jumbotron text-center" ng-show="updation.loading">
+    <span class="glyphicon glyphicon-repeat spinner"></span>
+    <p>Loading....</p>
+</div>
+
+
+<div class="row show-hide-message" ng-show="updation.successMsg">
+    <div class="alert alert-success">{{updation.successMsg}}</div>
+</div>
+
+<div class="row show-hide-message" ng-show="updation.errorMsg">
+    <div class="alert alert-danger">{{updation.errorMsg}}</div>
+</div>
