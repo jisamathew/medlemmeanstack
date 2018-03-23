@@ -1,21 +1,53 @@
-<div class="panel panel-info">
-<div class="panel panel-heading" >
-    Browse Company
-    
-</div> 
+<!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Profile</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul  style="float:right" class="nav navbar-nav">
+            <li><a ng-show="!main.isLoggedIn" href="/register">Register</a></li>
 
-  
-                 
-   <table class="table">
-        <tr>
-            <td>Company Names</td>
-        </tr>
+            <li><a ng-show="main.isLoggedIn && main.authorized" href="/organprofile">Company:{{main.organizationname}}</a></li>
+            <li><a ng-show="main.isLoggedIn && !main.authorized" href="/profile"><input type="text" value="{{main.firstname}} {{main.lastname}}" disabled></a></li>
+            <li style="float:right"><a ng-show="!main.isLoggedIn" href="/login">Login</a></li>
+            <li><a ng-show="main.isLoggedIn" href="#" ng-click="main.logout();">Logout</a></li>
+           
+          </ul>
+          
+        </div>
+      </div>
+    </nav>
+     <br><br>
+    <br>
+    <br>
+<div class="row">
+    <div class="col-sm-4"></div>
+
+    <div class="col-sm-4"><h3><strong>Browse Organizations</strong></h3></div>
+
+    <div class="col-sm-4"></div>
+</div>
+<div class="row">
+    <div class="col-sm-4"></div>
+
+    <div class="col-sm-4">
+         <table class="table">
+        
             <tr ng-repeat="company in searchin.orgn">
-                <td>
- <img class="btn" href="/viewoneorg/{{company.organizationnumber}}" src="/uploads/images/{{company.image}}" style="width:60px;height:60px" >
+               <td>
+
+<button ><a class="img-thumbnail" href="/viewoneorg/{{company.organizationnumber}}"><img ng-src="/uploads/images/{{company.image}}" style="width:60px;height:60px" ></a></button>
+
 
                   
-                        {{ company.subscriptionname }}
+                        {{ company.organizationname }}
                   
                        <!-- <a href="/company/:organizationname">
                        
@@ -26,8 +58,12 @@
            
             </tr>
     </table>
-    
+    </div>
 
-
+    <div class="col-sm-4"></div>
 </div>
-<br>
+
+  
+                 
+  
+    

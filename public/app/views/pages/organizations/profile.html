@@ -1,61 +1,128 @@
-<div class="page-header">
-        <h1 style="color:white"> {{main.username}}'s Profile</h1>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Company:{{main.organizationname}}</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul  style="float:right" class="nav navbar-nav">
+            <li><a ng-show="!main.isLoggedIn" href="/register">Register</a></li>
 
+            <li><a ng-show="main.isLoggedIn && main.authorized" href="/organprofile"><label>{{main.organizationname}}</label></a></li>
+            <li><a ng-show="main.isLoggedIn && !main.authorized" href="/profile">Hello {{main.firstname}} {{main.lastname}}</a></li>
+            <li style="float:right"><a ng-show="!main.isLoggedIn" href="/login">Login</a></li>
+            <li><a ng-show="main.isLoggedIn" href="#" ng-click="main.logout();">Logout</a></li>
+           
+          </ul>
+          
+        </div>
+      </div>
+    </nav>
+    <br>
+    <br>
+    <br>
+    <br>
+<div name="onebox" ng-repeat="org in ctrlview.orgn">
+<div class="row">
+    <div class="col-sm-4">
+         
 </div>
-<div class="panel panel-info">
-    <div class="panel-heading" style="text-align:center;"><strong>Organization Profile </strong></div>
-<table class="table" ng-repeat="org in ctrlview.orgn">
+    <div class="col-sm-4">
+        <div class="row">
+            <div class="col-sm-3">
+              <br><br>
+        <a href="/editprofile" ng-show="main.isLoggedIn && main.authorized" ><button class="btn btn-warning">Edit Profile</button></a>
+        
+            </div>
+            <div class="col-sm-6">
+            <img class="img-thumbnail" src="/uploads/images/{{org.image}}" style="width:200px;height:160px;">
+            </div>
+            <div class="col-sm-3">
+                <a ng-show="main.isLoggedIn && main.authorized" href="/subscription" ><button class="btn btn-primary">Create Subscription</button></a>
+           
+            <br>
+            <br>
+             <a ng-show="main.isLoggedIn && main.authorized" href="/billing" ><button class="btn btn-primary">Create Billing</button></a>
+            <br>
+            <br>
+
+            <a ng-show="main.isLoggedIn && main.authorized" href="/benefit" ><button class="btn btn-primary">Create Benefit</button></a>
+
+      
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-5"></div>
+
+    <div class="col-sm-5">
+        <table >
+           
+
     <tr>
         <td>Organization Number</td>
-
+        <td>&nbsp;</td>
         <td>{{org.organizationnumber}}</td>
+      
     </tr>
     <!--<input type="text" value="{{main.organizationnumber}}"> -->
         <tr>
         <td>Organization Name</td>
-
+        <td>&nbsp;</td>
         <td>{{org.organizationname}}</td>
     </tr>
         <tr>
         <td>Address</td>
-
+        <td>&nbsp;</td>
         <td>{{org.address}}</td>
     </tr>
         <tr>
         <td>No.of Members</td>
-
+        <td>&nbsp;</td>
         <td>{{org.noofmember}}</td>
     </tr>
-    <tr>
-        <td>
-            
-            <a href="/editprofile" ng-show="main.isLoggedIn && main.authorized" ><button class="btn btn-primary">Edit Profile</button></a>
-       
-        </td>
+    </table>
+    
+    </div>
 
-        <td>
-        
-
-
-<div class="btn-grp" style="float:right">
-
-<!--<a ng-show="main.isLoggedIn && main.authorized" href="/management" ><button>Management</button></a>-->
-               <a ng-show="main.isLoggedIn && main.authorized" href="/subscription" ><button class="btn btn-primary">Create Subscription</button></a>
-             <a ng-show="main.isLoggedIn && main.authorized" href="/billing" ><button class="btn btn-primary">Create Billing</button></a>
-         
-            <a ng-show="main.isLoggedIn && main.authorized" href="/benefit" ><button class="btn btn-primary">Create Benefit</button></a>
+    <div class="col-sm-2"></div>
 </div>
+</div>
+<br>
 
+<div class="row">
 
-
-
-        </td>
+<div class="col-sm-5"></div>
+<div class="col-sm-5">
+     <u><h4><strong>Subscriptions </strong></h4></u>
+    <table  name="table 2" >
+       <tr ng-repeat="sub in ctrlview.subs ">
+        <!--<td >{{sub.sub_id}}</td>-->
+         <td>  <span class="glyphicon glyphicon-remove-sign" style="float:right;color:red;" ng-click="ctrlview.deleteOrgSubs(sub.sub_id,sub.organizationnumber);" onClick="window.location.reload();" ng-show="main.isLoggedIn && main.authorized">
+                 </span> 
+                  </td> 
+                  <td>&nbsp;&nbsp;&nbsp;</td>
+                  <td>{{sub.sub_id}}</td>
+                  <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>{{sub.timeinterval}} {{sub.subscriptionname}}</td>      
+        <!--{{sub.organizationnumber}}-->
+         
     </tr>
     
     </table>
-    
 </div>
-
+<div class="col-sm-2"></div>
+</div>
 <!--
 <div class="row">
    <div class="col-md-6">Organization Number</div>
@@ -63,3 +130,97 @@
         <div class="col-md-6">{{main.organizationnumber}}</div>
    </div>
    -->
+   <div class="row">
+
+<div class="col-sm-5"></div>
+<div class="col-sm-5">
+     <u><h4><strong>Billings </strong></h4></u>
+
+<table name="table 2" >
+     
+    <!--<input type="text" value="{{main.organizationnumber}}"> -->
+        <tr ng-repeat="billing in ctrlview.bill">
+        <!--<td >{{billing.billingname}}</td>-->
+        <td>  <span class="glyphicon glyphicon-remove-sign" style="float:right;color:red;" ng-click="ctrlview.deleteOrgBill(billing.bill_id);" onClick="window.location.reload();" ng-show="main.isLoggedIn && main.authorized">
+                 </span> 
+                  </td> 
+                  <td>&nbsp;&nbsp;&nbsp;</td>
+                  
+        <td>{{billing.sub_id}}</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>${{billing.amount}} {{billing.timeinterval}}</td>
+           </tr>
+    </table>
+    </div>
+    <div class="col-sm-2"></div>
+   </div>
+<div class="row">
+
+<div class="col-sm-5"></div>
+<div class="col-sm-5">
+     <u><h4><strong>Benefits </strong></h4></u>
+<table  name="table 3" >
+     
+    <!--<input type="text" value="{{main.organizationnumber}}"> -->
+        <tr ng-repeat="benefits in ctrlview.ben">
+           <td><span class="glyphicon glyphicon-remove-sign" style="float:right;color:red;" ng-click="ctrlview.deleteBenefits(benefits.ben_id,benefits.organizationnumber);" onClick="window.location.reload();" ng-show="main.isLoggedIn && main.authorized">
+                  </span> 
+                   </td>
+        <td><img src="/uploads/images/{{benefits.image}}" style="width:60px;height:60px;"></td>
+        
+        <td >{{benefits.benefitname}}</td>
+      
+           </tr>
+    
+    </table>
+
+<br>
+<div class="jumbotron text-center" ng-show="organview.loading">
+    <span class="glyphicon glyphicon-repeat spinner"></span>
+    <p>Loading....</p>
+</div>
+
+
+<div class="row show-hide-message" ng-show="organview.successMsg">
+    <div class="alert alert-success">{{organview.successMsg}}</div>
+</div>
+
+<div class="row show-hide-message" ng-show="organview.errorMsg">
+    <div class="alert alert-danger">{{organview.errorMsg}}</div>
+</div>
+
+</div>
+<div class="col-sm-5"></div>
+</div>
+<!--
+<div class="panel panel-info" >
+    <div class="panel-heading" style="text-align:center;">
+        <strong>
+          My Members
+        </strong>
+    </div> 
+<table class="table" name="table 3" >
+     
+    <tr>
+        <td>SSN</td>
+        <td>Name</td>
+        <td>Email</td>
+         <td>Gender</td>
+
+     
+    </tr>
+        <tr ng-repeat="mem in ctrlview.memb">
+            <td>{{mem.ssn}}</td>
+        <td >{{mem.firstname}}&nbsp;{{mem.lastname}}</td>
+        <td>{{mem.email}}</td>
+        <td>{{mem.gender}}</td>
+        <td><img src="/uploads/images/{{mem.image}}" style="width:60px;height:60px;"></td>
+           </tr>
+    
+    </table>
+    
+
+</div>-->
+
+
+

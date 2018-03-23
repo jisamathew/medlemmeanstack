@@ -1,7 +1,7 @@
 var app = angular.module('appRoutes', ['ngRoute'])
 .config(function($routeProvider,$locationProvider){
         $routeProvider.when('/',{
-            templateUrl: 'app/views/pages/home.html',
+            templateUrl: 'app/views/pages/users/register.html',
              
         }) 
         
@@ -48,7 +48,29 @@ var app = angular.module('appRoutes', ['ngRoute'])
             controllerAs:'ctrlview2',
              authenticated:true
         })
-
+        .when('/viewoneorg/:organizationnumber',{
+            templateUrl:'app/views/pages/users/viewoneorg.html',
+            controller:'userViewOneOrgCtrl',
+            controllerAs:'organview',
+            authenticated:true
+        })
+        .when('/bemember/:ssn/:organizationnumber',{
+            templateUrl:'app/views/pages/users/access.html',
+            controller:'memCtrl',
+            controllerAs:'getorg',
+            authenticated:true
+        })
+      .when('/deletesub/:sub_id',{
+          
+      })
+        /*
+        .when('/sub/:organizationnumber',{
+            templateUrl:'app/views/pages/users/vieworgsub.html',
+            controller:'suborgCtrl',
+            controllerAs:'getsub',
+            authenticated:true
+        })*/
+        
 
 //ORGANIZATION
       .when('/organizations',{

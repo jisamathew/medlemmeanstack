@@ -1,30 +1,36 @@
 angular.module('organControllers',['organServices','fileModelDirective'])
-.controller('registerCtrl',function($http,$location,$timeout,Organization)
+.controller('registerCtrl',function($http,$location,$timeout,Organization,$scope)
 {
-    var app =this;
-    console.log('inside organcontrol');
+   var app =this;
+   $scope.file = {};
    this.regOrgan = function(registerData){
-       
-    console.log(this.registerData);
        app.loading=true;
        app.errorMsg = false;
+       var imgfile=document.getElementById("fileinput");   
+       var pic=imgfile.files.item(0).name;     
+       $scope.uploading=true;
+       var file = $scope.file;
+        var fd= new FormData();
+        fd.append('myfile',file.upload);
+        $http.post('/api/upload/'+pic,fd,{
+            transformRequest:angular.identity,
+            headers:{'Content-Type':undefined}
+        });
+            app.loading=true;
+            app.errorMsg = false;
 
-        
-    Organization.create(app.registerData).then(function(data){
-console.log('inside create ctrl'+app.registerData);
+       Organization.create(app.registerData,pic).then(function(data){
             if(data.data.success){
-                 console.log('success');
                 //Create success message
                  app.loading=false;
                 app.successMsg = data.data.message + '....Redirecting';
                 //Redirect to home
                 $timeout(function(){    
-                       $location.path('/');
+                       $location.path('/login');
             },2000);
             }
             else
                 {
-                    console.log('fails');
                      app.loading=false; 
                     app.errorMsg = data.data.message;
                     app.successMsg = false;
@@ -32,19 +38,16 @@ console.log('inside create ctrl'+app.registerData);
         });
     };
 })
-.controller('billCtrl',function($http,$location,$timeout,Organization){
+.controller('billCtrl',function($http,$scope,$location,$timeout,Organization){
     var app =this;
-    console.log('inside billctrl');
     Organization.getSub().then(function(data){
-    app.subscript=data.data.subscript;
-    console.log(app.subscript);
+    $scope.subscript=data.data.subscript;
     });
     this.billOrgan = function(billData){
-        var sub_id=document.getElementById("sub_id").value;
-        console.log('saffs'+app.billData);
-        app.loading=true;
+     var org_no=document.getElementById("organizationnumber").value;
+     app.loading=true;
         app.errorMsg = false;
-        Organization.createbill(app.billData,sub_id).then(function(data){
+        Organization.createbill(app.billData,org_no).then(function(data){
                 if(data.data.success){ 
                     //Create success message
                     app.loading=false;
@@ -63,52 +66,37 @@ console.log('inside create ctrl'+app.registerData);
                 }
         });
     };
-  // var timeinterval = document.getElementById("time").value;
- 
 })
 
-.controller('subCtrl',function($http,$location,$timeout,Organization,$scope){
+.controller('subCtrl',function($http,$scope,$location,$timeout,Organization){
     var app =this;
-         console.log('Subscriptionctrl');
-       // var timeinterval = document.getElementById("time").value;
-     $scope.file = {};
-     this.subOrgan = function(subData){
-
-
-//for uploading to folder
-    var org_no=document.getElementById("organizationnumber").value;
-   
-    var imgfile=document.getElementById("fileinput");   
-    var pic=imgfile.files.item(0).name;
-     
-     console.log('afsdfdgds'+$scope.file);
-     console.log('inside Submit : '+imgfile);
-    $scope.uploading=true;
-    var file = $scope.file;
-   // this.upload = function(file){
-    //console.log('inside upload'+file);
-    var fd= new FormData();
-    fd.append('myfile',file.upload);
-    console.log(' File data'+fd);
-     $http.post('/api/upload',fd,{
-        transformRequest:angular.identity,
-        headers:{'Content-Type':undefined}
-    });
-//};
-
-            console.log("my image name : "+imgfile.files.item(0).name);
-            app.loading=true;
-            app.errorMsg = false;
-            Organization.createsub(app.subData,org_no,pic).then(function(data){
+       $scope.file = {};
+       this.subOrgan = function(subData){
+        app.loading = true;
+        app.errorMsg = false;
+        var org_no=document.getElementById("organizationnumber").value;
+        var imgfile=document.getElementById("fileinput");   
+        var pic=imgfile.files.item(0).name;
+        $scope.uploading=true;
+        var file = $scope.file;
+        var fd= new FormData();
+        fd.append('myfile',file.upload);
+        $http.post('/api/upload/'+pic,fd,{
+            transformRequest:angular.identity,
+            headers:{'Content-Type':undefined}
+        });
+        app.loading=true;
+        app.errorMsg = false;
+        Organization.createsub(app.subData,org_no,pic).then(function(data){
             if(data.data.success){ 
                 //Create success message
                  app.loading=false;
                 app.successMsg = data.data.message + '....Redirecting';
                 //Redirect to home
-                 //$timeout(function(){    
+                 $timeout(function(){    
                        $location.path('/organprofile');
                         
-           // },2000);
+            },2000);
                       
             }
             else
@@ -121,20 +109,21 @@ console.log('inside create ctrl'+app.registerData);
     };
 })
 
-.controller('benCtrl',function($http,$location,$timeout,Organization){
+.controller('benCtrl',function($http,$scope,$location,$timeout,Organization){
    var app =this;
-console.log('inside benctrl');
-       // var timeinterval = document.getElementById("time").value;
-  this.benOrgan = function(benData){
-       console.log('saffs'+app.benData);
-       
+    $scope.file = {};
+    this.benOrgan = function(benData){
        var org_no=document.getElementById("organizationnumber").value;
-       console.log(org_no+'sfdhgfskjdkj');
-        var imgfile=document.getElementById("fileinput");
-        var pic=imgfile.files.item(0).name;
-        console.log("my image name : "+imgfile.files.item(0).name);
-       
-
+       var imgfile=document.getElementById("fileinput");
+       var pic=imgfile.files.item(0).name;
+       $scope.uploading=true;
+       var file = $scope.file;
+        var fd= new FormData();
+        fd.append('myfile',file.upload);
+        $http.post('/api/upload/'+pic,fd,{
+            transformRequest:angular.identity,
+            headers:{'Content-Type':undefined}
+        });
        app.loading=true;
        app.errorMsg = false;
    Organization.createben(app.benData,org_no,pic).then(function(data){
@@ -143,8 +132,9 @@ console.log('inside benctrl');
                  app.loading=false;
                 app.successMsg = data.data.message + '....Redirecting';
                 //Redirect to home
-                //$timeout(function(){    
+           $timeout(function(){    
                        $location.path('/organprofile');
+            },2000);
                        
             }
             else
@@ -159,25 +149,11 @@ console.log('inside benctrl');
 .controller('updateCtrl',function($http,$location,$timeout,Organization){
    var app =this;
      app.loading=true;
-app.errorMsg = false;
- 
-console.log('inside updatectrl');
-       // var timeinterval = document.getElementById("time").value;
-Organization.getOrgans().then(function(data){
-
-    console.log('get backed value in crtller'+data.data.orgname);
-
-        if(data.data.success){ 
+     app.errorMsg = false;
+    Organization.getOrgans().then(function(data){
+    if(data.data.success){ 
                 //Create success message
                 app.orgn=data.data.orgname;
-                console.log('inside search success'+app.orgn);
-                 app.loading=false;
-               // app.successMsg = data.data.message + '....Redirecting';
-                //Redirect to home
-               /* $timeout(function(){    
-                       $location.path('/editprofile');
-                       app.loading=false;
-            },2000);*/
             }
             else
                 {
@@ -189,17 +165,12 @@ Organization.getOrgans().then(function(data){
 });
 //////////EDIT ORGAN PROFILE
    this.putProfile = function(){
-       console.log('update done ###############################');
        app.loading=true;
        app.errorMsg = false;
        var org_no=document.getElementById("organizationnumber").value;
        var orgname=document.getElementById("organizationname").value;
        var address = document.getElementById("address").value;
-      // var username =document.getElementById("username").value;
-
-        console.log(org_no+'scaf'+orgname+'dslk'+address+'dswewe');
-   Organization.updateProfile(org_no,orgname,address).then(function(data){
-       console.log(data.data.success);
+     Organization.updateProfile(org_no,orgname,address).then(function(data){
             if(data.data.success){ 
                 //Create success message
                  app.loading=false;
@@ -228,18 +199,15 @@ var app = this;
 //app.loading=true;
 //app.errorMsg = false;
  
-Organization.getOrgans().then(function(data){
-
-    console.log('get backed value in crtller'+data.data.orgname);
-
-        if(data.data.success){ 
+Organization.getOrgans().then(function(data,$scope,$location,$timeout){
+      if(data.data.success){ 
                 //Create success message
                 app.orgn=data.data.orgname;
-                console.log('inside search success'+app.orgn);
+                app.subs = data.data.subsc;
+               app.bill = data.data.billin;
+               app.ben = data.data.benefi;
+               app.memb = data.data.member;
                  app.loading=false;
-              //  app.successMsg = data.data.message + '....Redirecting';
-                //Redirect to home
-                    
             }
             else
                 {
@@ -249,4 +217,57 @@ Organization.getOrgans().then(function(data){
                 }
 
 });
-  });
+this.deleteOrgBill = function(bill_id){
+Organization.billDelete(bill_id).then(function(data){
+if(data.data.success){ 
+              app.loading=false;
+              app.successMsg = data.data.message + '....Redirecting';
+             app.errorMsg = false;
+              $timeout(function(){    
+                 app.loading=true;
+                 $location.path('/organprofile');
+            },2000);
+          }
+      else{
+                    app.loading=false; 
+                     app.errorMsg = data.data.message;
+                     app.successMsg = false;      
+          }
+});   
+};
+this.deleteBenefits = function(ben_id,organizationnumber){
+    Organization.benDelete(ben_id,organizationnumber).then(function(data){
+          if(data.data.success){ 
+              app.loading=false;
+              app.successMsg = data.data.message + '....Redirecting';
+             app.errorMsg = false;
+              $timeout(function(){    
+                   $location.path('/organprofile');
+            },2000);
+          }
+      else{
+                    app.loading=false; 
+                     app.errorMsg = data.data.message;
+                     app.successMsg = false;      
+          }
+     });
+};
+this.deleteOrgSubs = function(sub_id,organizationnumber){
+    Organization.subDelete(sub_id,organizationnumber).then(function(data){
+         if(data.data.success){ 
+              app.loading=false;
+              app.successMsg = data.data.message + '....Redirecting';
+             app.errorMsg = false;
+              $timeout(function(){    
+                  $location.path('/organprofile');
+            },2000);
+          }
+      else{
+                    app.loading=false; 
+                     app.errorMsg = data.data.message;
+                     app.successMsg = false;      
+          }
+    });
+};
+
+});

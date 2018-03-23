@@ -3,16 +3,11 @@ angular.module('authServices',[])
     authFactory = {};
 //    Auth.create(regData);
     authFactory.login = function(loginData){
-        console.log('authfactory'+loginData);
         return $http.post('/api/authenticate',loginData).then(function(data){
-                  console.log('authfactory settoken');
          AuthToken.setToken(data.data.token);
             return data;
         });
     };
-
-
-
 //Auth.isLoggedIn
 authFactory.isLoggedIn = function()
 {
@@ -33,9 +28,6 @@ authFactory.getUser=function(){
         $q.reject({message: 'User has no token'});
     }
 };
-
-
-
 //Auth.logout();
     authFactory.logout=function(){
         AuthToken.setToken();
@@ -55,18 +47,13 @@ authFactory.getUser=function(){
     }        
     else{
         $window.localStorage.removeItem('token');
-    
     }
-    
-
 };
 
 //Authtoken.getToken();
     authTokenFactory.getToken = function(){
         return $window.localStorage.getItem('token');
     };
-
-
     return authTokenFactory;
 })
 .factory('AuthInterceptors',function(AuthToken){

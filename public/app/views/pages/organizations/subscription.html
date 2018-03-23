@@ -1,10 +1,42 @@
 
-<div class="panel panel-info">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Company:{{main.organizationname}}</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul  style="float:right" class="nav navbar-nav">
+            <li><a ng-show="!main.isLoggedIn" href="/register">Register</a></li>
+
+            <li><a ng-show="main.isLoggedIn && main.authorized" href="/organprofile"><label>{{main.organizationname}}</label></a></li>
+            <li><a ng-show="main.isLoggedIn && !main.authorized" href="/profile">Hello {{main.firstname}} {{main.lastname}}</a></li>
+            <li style="float:right"><a ng-show="!main.isLoggedIn" href="/login">Login</a></li>
+            <li><a ng-show="main.isLoggedIn" href="#" ng-click="main.logout();">Logout</a></li>
+           
+          </ul>
+          
+        </div>
+      </div>
+    </nav>
+    <br><br><br><br>
+    <div class="row">
+      <div class="col-sm-4">
+    </div>
+
+    <div class="col-sm-4">
+    
     <div style="text-align:center;"><strong><h1>Medlem</h1></strong></div>
     <div  style="text-align:center;">
     
 <strong>Create a subscription</strong>
-    
+   
      <br>
  <form ng-submit="subscript.subOrgan(subData);" id="subscription">
   
@@ -13,19 +45,22 @@
   
      <br>
     <!--Billing Name-->
-    <label>Subscription name:</label>
-    <input  type="text" name="subscriptionname" placeholder="Enter subscription name" ng-model="subscript.subData.subscriptionname" >
+    <input  type="text" class="form-control" name="subscriptionname" placeholder="Subscription name" ng-model="subscript.subData.subscriptionname" >
   
   
   
      <br>
-    <!--Billing Amount-->
-   <!--  <input  type="text" name="image" placeholder="upload image" ng-model="subscript.subData.image">
-    <a href="#" class="btn btn-default">
-          <span class="glyphicon glyphicon-upload"></span> Upload
-        </a><br>
--->
+  <br>
+     
 
+<div class="btn btn-default form-control">
+     
+  <input type="file" placeholder="Upload Image" file-model="file.upload" id="fileinput" name="myfile" ng-disabled="uploading" >
+
+</div>
+<br>
+<br>
+<!--
      
     <div class="file-field input-field">
         <label>Upload Image:</label>
@@ -37,11 +72,10 @@
 </div>
 
     </div>
- 
+--> 
     <!--Time-->
-    <label>Time Interval:</label>
-   <select class="dropdown" name="timeinterval" ng-model="subscript.subData.timeinterval">
-       <option value="" disabled selected>--SELECT--</option>
+   <select class="form-control" class="dropdown" name="timeinterval" ng-model="subscript.subData.timeinterval">
+       <option value="" disabled selected>--Select Time Interval--</option>
       
        <option>Daily</option>
 
@@ -53,13 +87,13 @@
 
        <br>
 
-<button class="btn btn-default"  type="submit">Create</button>
+<button class="btn btn-info form-control"  type="submit">Create</button>
 
 
 
 </form>
      </div>
-      </div>
+      
 <br>
 <div class="jumbotron text-center" ng-show="subscript.loading">
     <span class="glyphicon glyphicon-repeat spinner"></span>
@@ -74,3 +108,7 @@
 <div class="row show-hide-message" ng-show="subscript.errorMsg">
     <div class="alert alert-danger">{{subscript.errorMsg}}</div>
 </div>
+</div>
+<div class="col-sm-4">
+</div>
+    </div>

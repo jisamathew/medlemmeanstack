@@ -9,7 +9,8 @@ var BenefitSchema = new Schema({
     benefitdesc:{type:String,lowercase:true,required:true},
     image:{type:String,lowercase:true,required:true},
     timeinterval:{type:String,lowercase:true,required:true},
-    organizationnumber:{type:Number,required:true}
+    organizationnumber:{type:Number,required:true},
+    orgimage:{type:String,lowercase:true}
 });
 
 BenefitSchema.plugin(autoIncrement, {field: 'ben_id' });

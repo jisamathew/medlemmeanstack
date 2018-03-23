@@ -1,40 +1,64 @@
 
-<div class="panel panel-info">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Company:{{main.organizationname}}</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul  style="float:right" class="nav navbar-nav">
+            <li><a ng-show="!main.isLoggedIn" href="/register">Register</a></li>
+
+            <li><a ng-show="main.isLoggedIn && main.authorized" href="/organprofile"><label>{{main.organizationname}}</label></a></li>
+            <li><a ng-show="main.isLoggedIn && !main.authorized" href="/profile">Hello {{main.firstname}} {{main.lastname}}</a></li>
+            <li style="float:right"><a ng-show="!main.isLoggedIn" href="/login">Login</a></li>
+            <li><a ng-show="main.isLoggedIn" href="#" ng-click="main.logout();">Logout</a></li>
+           
+          </ul>
+          
+        </div>
+      </div>
+    </nav>
+    <br><br><br><br>
     <div style="text-align:center;"><strong><h1>Medlem</h1></strong></div>
     <div  style="text-align:center;">
     
 <strong>Create benefit</strong>
     
      <br>
+     <div class="row">
+       <div class="col-sm-4">
+     </div>
+
+       <div class="col-sm-4">
  <form ng-submit="obenefit.benOrgan(benData);" id="benefit">
   
     <input type="hidden"  id="organizationnumber" name="organizationnumber" value="{{main.organizationnumber}}" >
+    
+     
      <br>
     <!--Benefit Name-->
-    <label>Benefit name:</label>
-    <input  type="text" name="benefitname" placeholder="Enter benefit name" ng-model="obenefit.benData.benefitname">
+    <label></label>
+    <input class="form-control" type="text" name="benefitname" placeholder="Benefit name" ng-model="obenefit.benData.benefitname">
   
     <br>
     <!--Benefit desc -->
-    <label>Benefit description:</label>
-    <input  type="text" name="benefitdesc" placeholder="Enter benefit description" ng-model="obenefit.benData.benefitdesc" >
+    <label></label>
+    <input class="form-control" type="text" name="benefitdesc" placeholder="Benefit description" ng-model="obenefit.benData.benefitdesc" >
   
   
-     <br>
-    <!--Billing Amount-->
-    <label>Upload Image:</label>
-    <div class="btn">
-  <input type="file" file-model="file.upload" id="fileinput" name="myfile" ng-disabled="uploading" >
-
-</div>
-
     <br>
 
     <!--Time-->
-    <label>Time Interval:</label>
-   <select class="dropdown" name="timeinterval" ng-model="obenefit.benData.timeinterval">
+    <label></label>
+   <select class="form-control" class="dropdown" name="timeinterval" ng-model="obenefit.benData.timeinterval">
 <!--Select-->
-    <option value="" disabled selected>--SELECT--</option>
+    <option value="" disabled selected>--Select Time Interval--</option>
       
        <option>Daily</option>
 
@@ -44,13 +68,16 @@
    </select>
     <br>
 
-       <br>
+    <!--Billing Amount-->
+    <label></label>
+    <div class="form-control">
+  <input type="file" file-model="file.upload" placeholder="Upload Image" id="fileinput" name="myfile" ng-disabled="uploading" >
 
-<button class="btn btn-default"  type="submit">Create</button>
-
+</div>
+<br>
+<button class="btn btn-info form-control"  type="submit">Create</button>
 </form>
-     </div>
-     </div>
+     
 <br>
 <div class="jumbotron text-center" ng-show="obenefit.loading">
     <span class="glyphicon glyphicon-repeat spinner"></span>
@@ -64,4 +91,10 @@
 
 <div class="row show-hide-message" ng-show="obenefit.errorMsg">
     <div class="alert alert-danger">{{obenefit.errorMsg}}</div>
+</div>
+
+     </div>
+
+       <div class="col-sm-4">
+     </div>
 </div>

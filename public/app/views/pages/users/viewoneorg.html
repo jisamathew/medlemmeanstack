@@ -1,3 +1,242 @@
-hai from one org
-create page using id from last page redirected and show a button
- if a member already or become member
+
+<div class="container">
+<div name="onebox"  ng-repeat="org in orgnnew">
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Company:{{org.organizationname}}</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul  style="float:right" class="nav navbar-nav">
+            <li><a ng-show="!main.isLoggedIn" href="/register">Register</a></li>
+
+            <li><a ng-show="main.isLoggedIn && main.authorized" href="/organprofile">Company:{{main.organizationname}}</a></li>
+            <li><a ng-show="main.isLoggedIn && !main.authorized" href="/profile"><input type="text" value="{{main.firstname}} {{main.lastname}}" disabled></a></li>
+            <li style="float:right"><a ng-show="!main.isLoggedIn" href="/login">Login</a></li>
+            <li><a ng-show="main.isLoggedIn" href="#" ng-click="main.logout();">Logout</a></li>
+           
+          </ul>
+          
+        </div>
+      </div>
+    </nav>
+    <br><br>
+    <br>
+    <br>
+        <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+        <img class="img-thumbnail" src="/uploads/images/{{org.image}}" style="width:160px;height:160px;">
+            </div>
+        <div class="col-sm-4"></div>
+        </div>
+       
+<div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+    <table >
+    <tr>
+        <td>Organization Number</td>
+
+        <td >{{org.organizationnumber}}</td>
+     
+    </tr>
+    <!--<input type="text" value="{{main.organizationnumber}}"> -->
+        <tr>
+        <td>Organization Name</td>
+
+        <td>{{org.organizationname}}</td>
+    </tr>
+        <tr>
+        <td>Address</td>
+
+        <td>{{org.address}}</td>
+    </tr>
+        <tr>
+        <td>No.of Members</td>
+
+        <td>{{org.noofmember}}</td>
+    </tr>
+     </table>
+
+        </div>
+        <div class="col-sm-3"></div>
+        </div>
+        <br>
+<div class="row">
+    <div class="col-sm-4"></div>
+
+    <div class="col-sm-4">
+         <a href="/bemember/{{main.ssn}}/{{org.organizationnumber}}"  ng-show="main.isLoggedIn && !main.authorized" ng-if=!mem >
+                <button class="btn btn-success" >
+                     Become a Member
+                </button>
+                </a>
+                
+                <button class="btn btn-success"  ng-show="main.isLoggedIn && !main.authorized"  ng-if=mem disabled>
+                    You are a Member
+                </button>
+              
+    </div>
+
+    <div class="col-sm-4"></div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-4"></div>
+
+    <div class="col-sm-4">
+          <button class="btn btn-danger" data-toggle="modal" data-target="#myModal"   ng-show="main.isLoggedIn && !main.authorized"  ng-if=mem >
+                   Cancel Membership
+                </button> 
+    </div>
+    <div class="col-sm-4"></div>
+     <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Cancel Membership</h4>
+        </div>
+        <div class="modal-body">
+          <p>Do you wish to cancel your membership with {{org.organizationname}} ?</p>
+        </div>
+        <div class="modal-footer">
+          <div style="float:left"><h2 class="glyphicon glyphicon-remove-sign" style="color:red;" data-dismiss="modal"></h2>Decline</div>
+         <div style="float:right">Approve<h2 class="glyphicon glyphicon-ok-sign" style="color:green;" ng-click="organview.deleteMember(org.organizationnumber);" data-dismiss="modal"></h2></div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+</div>  
+    <div class="row" ng-repeat="org in orgnnew">
+
+            <label>{{orgnnew.organizationnumber}}</label>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-4"></div>
+
+    <div class="col-sm-4">
+        <u><h4><strong>Subscriptions </strong></h4></u>
+
+        <table name="table 2" >
+     
+   
+    <!--<input type="text" value="{{main.organizationnumber}}"> -->
+        <tr ng-repeat="sub in sub ">
+        <td> {{sub.timeinterval}} {{sub.subscriptionname}}</td>  
+        <td>
+                <h4 class="glyphicon glyphicon-ok-sign" ng-click="organview.Subscribe(sub.sub_id);" ng-show="main.isLoggedIn && !main.authorized" ng-if="mem" style="float:right;color:green;">
+                </h4>
+                <!-- <button class="btn btn-success" ng-show="main.isLoggedIn && !main.authorized" ng-if="mem && subscr" style="float:right" disabled>
+                    Subscribed
+                </button>-->
+       
+        </td>
+<td>&nbsp;</td>
+        <td>
+            
+              
+                <h4 class="glyphicon glyphicon-remove-sign" ng-click="organview.deleteSubscribe(sub.sub_id);" ng-show="main.isLoggedIn && !main.authorized" style="float:right;color:red;" ng-if="mem">
+                    </h4>
+                    
+              
+       
+        </td>
+    </tr>
+    
+    </table>
+    <div class="jumbotron text-center" ng-show="organview.loading">
+    <span class="glyphicon glyphicon-repeat spinner"></span>
+    <p>Loading....</p>
+</div>
+
+
+<div class="row show-hide-message" ng-show="organview.successMsg">
+    <div class="alert alert-success">{{organview.successMsg}}</div>
+</div>
+
+<div class="row show-hide-message" ng-show="organview.errorMsg">
+    <div class="alert alert-danger">{{organview.errorMsg}}</div>
+</div>
+  </div>
+
+    <div class="col-sm-4"></div>
+</div>
+<div class="row">
+    <div class="col-sm-4"></div>
+
+    <div class="col-sm-4">
+        <u><h4><strong>Billings</strong></h4></u>
+
+        <table name="table 2" >
+     
+    
+    <!--<input type="text" value="{{main.organizationnumber}}"> -->
+        <tr ng-repeat="billing in billin">
+        <td >${{billing.amount}} {{billing.timeinterval}}</td>
+        
+           </tr>
+    
+    </table>
+    
+
+    </div>
+
+    <div class="col-sm-4"></div>
+</div>
+
+<div class="row">
+    <div class="col-sm-4"></div>
+
+    <div class="col-sm-4">
+        <u><h4><strong>Benefits</strong></h4></u>
+
+        <table name="table 3" >
+     
+    
+    <!--<input type="text" value="{{main.organizationnumber}}"> -->
+        <tr ng-repeat="benefits in benefit">
+         
+        <td><img src="/uploads/images/{{benefits.image}}" style="width:40px;height:40px;float:right;"></td>
+        <td >{{benefits.benefitname}}</td>
+       
+           </tr>
+    
+    </table>
+
+    </div>
+
+    <div class="col-sm-4"></div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+<!--
+<div class="row">
+   <div class="col-md-6">Organization Number</div>
+
+        <div class="col-md-6">{{main.organizationnumber}}</div>
+   </div>
+   -->

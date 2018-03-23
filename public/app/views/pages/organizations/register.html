@@ -1,59 +1,62 @@
 
-<div class="panel panel-info" style="width:50%" >
-    <div style="text-align:center;"><strong><h1>Medlem</h1></strong></div>
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+    <div style="text-align:center;"><strong><h1><strong>Medlem</strong></h1></strong></div>
+    <h4>Sign up as a</h4>
+     
     <div class="btn-group btn-group-justified" style="text-align:center;">
-    
-<strong>Sign up as a</strong>
-     <br>
- <a href='/register'><button type=button class="btn btn-default" id=f1>Member</button></a>
-     <a href='/organ'><button type=button class="btn btn-success" id=f2 >Organization</button></a>
-
+    <a href='/register'><button type=button class="btn btn-default" id=f1>Member</button></a>&nbsp;
+    <a href='/organ'><button type=button class="btn btn-success" id=f2 >Organization</button></a>
     </div>
-     <br>
-     <div class="table" style="text-align:center;">
 
- <form ng-submit="register1.regOrgan(registerData);" id="organizations">
-  
-    
-     <br>
-     <!--Organizationnumber
+    <div class="table" style="text-align:center;">
+    <form ng-submit="register1.regOrgan(registerData);" id="organizations">
+    <!--Organizationnumber
     <label>Organizationnumber:</label>
     <input  type="number" name="organizationnumber" placeholder="Please enter organizationnumber" ng-model="register1.registerData.organizationnumber">
     <br>
      <br>
   Organization Name-->
-    <label>Organizationname:</label>
-    <input  type="text" name="organizationname" placeholder="Please enter your name" ng-model="register1.registerData.organizationname"><br>
-    
-    <br>
+    <label></label>
+    <input  type="text" class="form-control" name="organizationname" placeholder="Organizationname" ng-model="register1.registerData.organizationname">
+     <br><br>
     <!--Address-->
-<label>Address:</label>
-    <input  type="text" name="address" placeholder="Please enter address" ng-model="register1.registerData.address">
-    <br>
+<label></label>
+    <input  type="textarea" class="form-control" name="address" placeholder="Address" ng-model="register1.registerData.address">
+    
     <br>
      <!--No. of Members
 <label>No. of Members:</label>
     <input type="number" name="noofmember" placeholder="Please enter total member count" ng-model="register1.registerData.noofmember">
     <br> <br>-->
      <!--username-->
-    <label>Username:</label>
-    <input  type="text" name="username" placeholder="Please enter your username" ng-model="register1.registerData.username">
+    <br>
+    <label></label>
+    <input  type="text" class="form-control" name="username" placeholder="Username" ng-model="register1.registerData.username">
+    <br>
     <br>
 <!--password-->
-    <label>Password:</label>
-    <input  type="text" name="password" placeholder="Please enter your passsword" ng-model="register1.registerData.password">
-    <br>
-<br>
+    <label></label>
+    <input  type="text"class="form-control" name="password" placeholder="Password" ng-model="register1.registerData.password">
+    <br><br>
+   
+     <label>Upload Image:</label> 
 
+    <div class="btn btn-default">     
+  <input type="file" file-model="file.upload" id="fileinput" name="myfile" ng-disabled="uploading" >
+</div>
+    <br><br>
     
 
-<button class="btn btn-success"  type="submit">Sign Up</button>
+<button class="btn btn-success form-control"  type="submit">Sign Up Now!</button>
+<br><br>
+<label>Already Logged in ??</label><a href="/login">Login Here...</a>
 
 </form>
-     
+
      </div>
-</div>
-<br>
+
 <div class="jumbotron text-center" ng-show="register1.loading">
     <span class="glyphicon glyphicon-repeat spinner"></span>
     <p>Loading....</p>
@@ -67,3 +70,9 @@
 <div class="row show-hide-message" ng-show="register1.errorMsg">
     <div class="alert alert-danger">{{register1.errorMsg}}</div>
 </div>
+     
+    </div>
+    <div class="col-sm-4"></div>
+  
+</div>
+<br>

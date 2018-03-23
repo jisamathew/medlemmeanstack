@@ -18,7 +18,8 @@
   <script src="assets/js/angular.js"></script>
   <script src="assets/js/angular-route.js"></script>
   <script src="assets/js/angular-animate.js"></script>
-
+ 
+  
 
   <!--Angular Config/routes-->
   <script src="app/app.js"></script>
@@ -36,6 +37,7 @@
  
  
   <!--Angular Services-->
+  
   <script src="app/services/userServices.js"></script>
 
   <script src="app/services/organServices.js"></script>
@@ -47,10 +49,10 @@
 
 </head>
 
-<body style="background-image:url('assets/image/org1.jpg');" ng-app="userApp" ng-controller="mainCtrl as main" ng-show="main.loadme" ng-cloak>
+<body ng-app="userApp" ng-controller="mainCtrl as main" ng-show="main.loadme" ng-cloak>
 
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <!--<nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -73,14 +75,11 @@
            
           </ul>
           
-        </div><!--/.nav-collapse -->
+        </div>
       </div>
-    </nav>
+    </nav>>-->
 
-    <div class="container theme-showcase" role="main">
-
-      <!-- Main jumbotron for a primary marketing message or call to action -->
-      <br><br><br><br>
+    <div class="container theme-showcase" role="main">  
       <div ng-view></div>
 
     </div> <!-- /container -->

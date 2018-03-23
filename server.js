@@ -1,7 +1,7 @@
 var express = require ('express');
 var app = express();
 var morgan = require('morgan');
-var port =process.env.PORT || 8000;
+var port =process.env.PORT || 8080;
 var mongoose=require('mongoose');
 var bodyParser = require('body-parser');
 var router = express.Router();
@@ -17,8 +17,8 @@ app.use('/api',appRoutes);
 //http://localhost:8080/users
 
 //db connection
-//mongoose.connect('mongodb://localhost:27017/medlem',function(err){
-    mongoose.connect('mongodb://jisa:jisa@ds257808.mlab.com:57808/medlem',function(err){
+mongoose.connect('mongodb://localhost:27017/medlem',function(err){
+   // mongoose.connect('mongodb://jisa:jisa@ds257808.mlab.com:57808/medlem',function(err){
    if(err)
    {
        console.log('Not connected to the db : '+err);
@@ -37,9 +37,3 @@ app.get('*',function(req,res){
 app.listen(port,function(){
     console.log('Running the server '+port);
 });
-
-/*app.get('/home',function(req,res){
-
-    res.send('Hello from home');
-});*/
-
